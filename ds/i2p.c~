@@ -1,0 +1,111 @@
+#include<stdio.h>
+//#include<charstack.h>
+#define MAX 100
+
+int top;
+char stack[MAX]={'$'};
+//--------------
+
+
+int prec(char c)
+{
+int asc,pre;
+asc=toascii(c);
+if(asc==36)
+pre=0;
+else if(asc==42||asc==47)//* and /
+pre=2;
+else if(asc==43||asc==45)//+ and -
+pre=1;
+return pre;
+}
+
+//----------------
+
+void push (char val)
+{
+ top++;
+ if (top==MAX-1)
+ printf("Full Stack\n");
+ else
+ stack[top]=val;
+}
+//------------
+void pop ()
+{
+ 	if (stack[top]=='$')
+	{
+ 	printf("Empty Stack can't pop\n");
+	} 
+	else
+	{
+	  printf("%c",stack[top]);
+ 	  
+	  top--;
+	}
+}
+
+//------------
+
+
+int main()
+{
+
+char str[MAX];
+int count=0;
+top=0;
+
+
+printf("Enter the expression:\n");
+gets(str);
+
+while(str[count]!='\0')
+{
+	
+	if(str[count]>='a' && str[count]<='z')
+	{
+	printf("%c",str[count]);
+	}
+	
+
+else if (str[count]=='*' ||str[count]=='/')
+  {
+   if (prec(str[count])>=prec(stack[top]))
+   push (str[count]);
+  else
+   {
+    while (prec(stack[top])>=prec(str[count]))
+    pop ();
+    push (str[count]);
+   }
+  }
+			
+
+		  
+else if (str[count]=='+' ||str[count]=='-')
+  {
+   if (prec(str[count])>=prec(stack[top]))
+   push (str[count]);
+   else
+   {
+    while (prec(stack[top])>=prec(str[count]))
+    pop ();
+    push (str[count]);
+   }
+  }
+	
+count++;
+}
+
+while(stack[top]!='$')
+{
+pop();
+}
+printf("\n");
+return 0;
+}
+
+
+
+
+

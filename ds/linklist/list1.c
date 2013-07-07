@@ -1,0 +1,65 @@
+#include<stdio.h>
+struct list
+{
+int data;
+struct list *next;//self ref. pointer
+};
+
+struct list *node;
+
+
+void insert(struct list *tmp,int val)
+{
+if(node==NULL)//list is empty
+	{
+	node=(struct list*)malloc(sizeof(struct list));
+		if(node==NULL)
+		{
+		return;
+		}
+		else
+		{
+		node->data=val;
+		node->next=NULL;
+		}
+	}
+else
+{
+    	while(tmp->next!=NULL)
+	{
+	tmp=tmp->next;
+	}
+	tmp->next=(struct list*)malloc(sizeof(struct list));
+	tmp->next->data=val;
+	tmp->next->next=NULL;
+}
+
+}
+
+
+
+void printlist(struct list *tmp)
+{
+while(tmp!=NULL)
+{
+printf("%d\n",tmp->data);
+printlist(tmp->next);
+}
+}
+
+int main()
+{
+struct list *node=NULL;
+
+struct list *tmp=node;
+insert(tmp,10);
+insert(tmp,10);
+//insert(tmp,20);
+//insert(tmp,1);
+//insert(tmp,2);
+printlist(tmp);
+return 0;
+}
+
+
+

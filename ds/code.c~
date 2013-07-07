@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct list
+{
+int data;
+struct list *next;
+};
+struct list *root=NULL;
+
+
+//------------------------------------------
+void create(int val)
+{
+  struct list *temp;	
+  temp=(struct list*)malloc(sizeof(struct list));
+  root=temp;
+  printf("\nENTER THE DATA: ");
+  temp->data=val;
+  temp->next=NULL;
+ 
+}
+
+/*void insert_beg(int val)
+{
+	struct list *temp1=temp;
+	temp1=(struct list*)malloc(sizeof(struct list));
+	temp1->data=val;
+	temp1->next=root;
+	root=temp1;
+}*/
+
+void append(int val)
+{
+struct node *temp,*r;
+/* CREATING A NODE AND ASSIGNING A VALUE TO IT */
+
+temp=(struct list *)malloc(sizeof(struct list));
+temp->data=num;
+r=(struct list *)root;
+
+if (p == NULL) /* IF LIST IS EMPTY CREATE FIRST NODE */
+{
+p=temp;
+p->next =NULL;
+}
+else
+{ /* GO TO LAST AND ADD*/
+
+while( r->next != NULL)
+r=r->next;
+r->next =temp;
+r=temp;
+r->next=NULL;
+}
+}
+
+
+void printlist()
+{
+	if(root==NULL)
+	{
+	printf("LIST IS EMPTY\n");
+	}
+
+struct list *temp1=root;
+while(temp1->next!=NULL)
+{
+printf("\t\tTHE LIST IS CURRENTLY:\n");
+printf("\t\t%d\t\n",temp1->data);
+}
+}
+
+
+
+
+int main()
+{
+int ch;
+
+while(1)
+	{
+	printf("1.Create a list\n2.Insert an element\n3.delete an element\n4.print the list\n5.print list in reverse order\n6.size of list\n");
+	printf("Enter your choice\n");
+	scanf("%d",&ch);
+	switch(ch)
+	{
+	case 1: create(); break;
+	case 2: insert(); break;
+	//case 3: delete(); break;
+	case 4: printlist(); break;
+	//case 5: rev_list_print(); break;
+	//case 6: size(); break; 
+	}
+	}
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

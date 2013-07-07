@@ -1,0 +1,80 @@
+#include<stdio.h>
+#define MAX 10
+int val,temp;
+ 
+int count;
+
+
+//push function
+//----------------------------------------------------------------
+void push(int stack[],int val)
+{
+ if(top==MAX-1)
+ {
+ printf("overflow");	
+ }
+ else
+ {
+ ++top; //increment to statu to point to new top element
+ stack[top]=val;
+ 
+ }
+}
+
+//pop function
+//---------------------------------------------------------
+int pop(int stack[])
+{
+ if(top==-1)
+ {
+ return -1; //underflow condition...no element in stack
+ }
+ else
+ {
+ temp=stack[top]; //pop successful
+ return temp;
+ }
+} 
+
+
+//display stack function
+//-------------------------------------------------------
+
+void display(int stack[])
+{
+ if(top==-1)
+ {
+ printf("stack empty\n");
+ }
+ else
+ {
+ for(count=top;count>=0;count++)
+ printf("%3d\n",stack[count]);  
+ }
+}
+
+
+int main()
+{
+int item;
+int stack[MAX];
+int top=-1;
+push(stack,1);
+item=pop(stack);
+display(stack);
+push(stack,2);
+push(stack,3);
+push(stack,4);
+push(stack,5);
+push(stack,6);
+item=pop(stack);
+printf("popped item is: %d",item);
+display(stack);
+}
+
+
+
+
+
+
+

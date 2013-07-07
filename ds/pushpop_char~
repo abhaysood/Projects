@@ -1,0 +1,57 @@
+#include<stdio.h>
+#define MAX 20
+char val;
+int top;
+//---------
+void push(char stack[],char val)
+{
+ if(top==MAX-1)
+ {
+ printf("overflow!!!!!!!\n");
+ }
+ else
+ {
+ ++top;
+ stack[top]=val;
+ }
+}
+
+//----------------
+void display(char stack[],int top)
+{
+ if(top==-1)
+ {
+ printf("Stack is EMPTY!!!!!!!\n");
+ }
+ else
+ {
+ for(count=top;count>0;count--)
+ {
+ printf("%c",stack[count]);
+ }
+}
+
+
+
+int main()
+{
+char stack[MAX];
+top=-1;
+char item;
+while((item=getchar())!='\n')
+ {
+ while(item!=' ')
+ {
+ push(stack,item);  
+ }
+ 
+display(stack,top);
+
+return 0;
+}
+
+
+
+
+
+

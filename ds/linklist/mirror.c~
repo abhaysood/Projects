@@ -1,0 +1,186 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 5
+int front,rear;
+int queue[MAX];
+
+struct bst
+{
+int data;
+struct bst *left,*right;
+};
+struct bst *root=NULL;
+
+//################### INSERT ############################
+void insert_tree(int val)
+{
+struct bst *temp;
+struct bst *temp1;
+temp=(struct bst*)malloc(sizeof(struct bst));
+	if(root==NULL)
+	{
+		temp->data=val;
+		temp->right=NULL;
+		temp->left=NULL;
+		root=temp;
+	}
+	else
+	{
+		temp1=root;
+		while(1)	
+		{
+			if(temp1->data>=val)
+			{
+				if(temp1->left==NULL)
+				{
+				temp->data=val;
+				temp1->left=temp;
+				temp->left=NULL;
+				temp->right=NULL;
+				return;			
+				}	
+				else
+				{
+				temp1=temp1->left;
+				}
+			}
+			else
+			{
+				if(temp1->right==NULL)
+				{			
+				temp->data=val;
+				temp1->right=temp;
+				temp->left=NULL;
+				temp->right=NULL;	
+				return;
+				}
+				else
+				{
+				temp1=temp1->right;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+//############## INORDER ##########################
+void inorder(struct bst *root)
+{
+struct bst *temp=root;
+if(temp==NULL)
+{
+//printf("BST EMPTY!!!!!!!\n");
+return;
+}
+else
+{
+inorder(temp->left);
+printf("%d\t",temp->data);
+inorder(temp->right);
+}
+printf("\n");
+}
+//---------------------------------------------
+
+int del(int queue[])
+{
+	int item;
+	if(front==-1)
+	{
+	printf("Underflow\n");
+	return;
+	}
+	else 
+	{
+		item=queue[front];
+		if(front==rear)
+		{
+		front=-1;rear=-1;
+		}
+		else
+		{
+		front=(++front)%MAX;
+		}
+		return(item);
+	}
+}
+
+
+//--------------------------------------------------
+void insert(int val,int queue[])
+{
+
+if((front==(rear+1)%MAX)||(front==0&&rear==MAX-1))
+{
+	printf("QUEUE FULL\n");
+	return;
+}
+
+else
+{
+	if(front==-1)
+	{
+	front=0;
+	rear=rear+1;
+	queue[rear%MAX]=val;
+	}
+
+}
+}
+//=================================================
+void dump(struct bst *root)
+{
+int queue[20];
+struct bst *temp=root;
+if(temp==NULL)
+{
+return;
+}
+else
+{
+inorder(temp->left);
+insert(temp->data,queue);
+inorder(temp->right);
+}
+}
+//-------------------------------------------------
+void display(int queue[])
+{
+int i;
+if(front==-1)
+	{
+	printf("Underflow\n");
+	}
+else
+
+	{
+        printf("Front[%d]->",front);
+        for(i=front;i!=rear;i=(i+1)%MAX)
+           { printf("%d ",queue[i]);
+	}
+        printf("%d ",queue[i]);
+        printf("<-[%d]Rear",rear);
+	}
+}
+
+//---------------------------------------------------
+int main()
+{
+int val,i;
+printf("Enter values for the first tree\n");
+for(i=0;i<8;i++)
+{
+printf("Enter the value\n");
+scanf("%d",&val);
+insert_tree(val);
+}
+dump(root);
+display(queue);
+return 0;
+}
+

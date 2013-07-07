@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+int data;
+struct node *next;
+struct node *prev;
+};
+
+struct node *root=NULL;
+
+
+void insertbeg(int val)
+{
+struct node *temp;
+temp=(struct node*)malloc(sizeof(struct node));
+temp->data=val;
+if(root==NULL)
+{
+root=temp;
+root->next=NULL;
+root->prev=NULL;
+}
+else
+{
+temp->next=root;
+root=temp;
+temp->prev=NULL;
+}
+}
+
+
+void display()
+{	printf("\n\n---------------------------------------------\n");
+	struct node *temp;
+	temp=root;
+	
+	if(temp==NULL)
+	{
+	printf("THE LIST IS EMPTY\n");
+	}
+	else
+	{
+		while(temp!=NULL)
+		{
+		temp=temp->next;
+		}
+		struct node *temp1=temp->prev;
+		while(temp1!=root)
+		{
+		temp1=temp1->prev;
+		printf("%d\t",temp1->data);
+		}
+		
+	}
+	printf("\n---------------------------------------------\n\n");
+}
+
+//-------------------------------------main()
+
+
+int main()
+{
+insertbeg(1);
+insertbeg(2);
+insertbeg(3);
+insertbeg(4);
+display();
+return 0;
+}

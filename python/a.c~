@@ -1,0 +1,24 @@
+#include<stdio.h>
+int maxSArray(int arr[], int size)
+{
+   int max_curr = 0, max_end = 0;
+   int i;
+   for(i = 0; i < size; i++)
+   {
+     max_end = max_end+ arr[i];
+     if(max_end< 0)
+        max_end = 0;
+     if(max_curr < max_end)
+        max_curr = max_end;
+    }
+    return max_curr;
+} 
+ 
+
+int main()
+{
+   int arr[] = {-2,-6,12,3,6,-1,2};
+   int max_sum = maxSArray(arr, 7);
+   printf("Maximum contiguous sum is %d\n", max_sum);
+   return 0;
+}

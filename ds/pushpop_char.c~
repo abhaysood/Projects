@@ -1,0 +1,70 @@
+//my name is abhay    ----------->    yahba si eman ym
+
+#include<stdio.h>
+
+#define MAX 20
+char val;
+int top;
+//---------
+void push(char stack[],char val)
+{
+ if(top==MAX-1)
+ {
+ printf("overflow!!!!!!!\n");
+ }
+ else
+ {
+ ++top;
+ stack[top]=val;
+ }
+}
+//---------------
+
+
+//----------------
+void display(char stack[],int top)
+{
+ int count;
+ if(top==-1)
+ {
+ printf("Stack is EMPTY!!!!!!!\n");
+ }
+ else
+ {
+ for(count=top;count>=0;count--)
+ {
+ printf("%c",stack[count]);
+ }
+ printf("\n");
+ }
+}
+
+
+
+/*int main()
+{
+char stack[MAX];
+char array[]="my name is abhay";
+top=-1;
+int i=0;
+
+while(array[i]!='\0')
+{
+if(array[i]==' ');
+{
+push(stack,array[i]);
+}
+i++;
+}
+
+
+display(stack,top);
+
+return 0;
+}
+
+*/
+
+
+
+

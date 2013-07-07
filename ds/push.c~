@@ -1,0 +1,17 @@
+#include<stdio.h>
+#define MAX 10
+int val,status;
+
+void push(int stack[],int val)
+{
+ if(top==MAX-1)
+ {
+ status=0;
+ }
+ else
+ {
+ status=1;
+ top=top+1;
+ stack[top]=val;
+ }
+}

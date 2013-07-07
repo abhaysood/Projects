@@ -1,0 +1,80 @@
+#include<stdio.h>
+
+char stk[20]={'$'},top=0;
+void push (char c);
+void pop ();
+int prec (char c);
+void main ()
+{
+ int i=0;
+ char str[20];
+ 
+ printf("Enter the infix expression:\n");
+ scanf("%s",str);
+ while (str[i]!='\0')
+ {
+  if (toascii(str[i])<=122 && toascii(str[i])>=97)
+  printf("%c",str[i]);
+  else if (str[i]=='(')
+  push (str[i]);
+  else if (str[i]==')')
+  {
+   while (stk[top]!='(')
+   pop ();
+   top--;
+  }
+  else if (str[i]=='*' || str[i]=='/')
+  {
+   if (prec(str[i])>prec(stk[top]))
+   push (str[i]);
+  }
+  else if (str[i]=='+' || str[i]=='-')
+  {
+   if (prec(str[i])>prec(stk[top]))
+   push (str[i]);
+  }
+   else
+   {
+    while (prec(stk[top])>prec(str[i]))
+    pop ();
+    push (str[i]);
+   }
+  }
+  i++;
+ }
+ while (stk[top]!='$')
+ pop ();
+ 
+}
+void push (char s)
+{
+ top=top+1;
+ if (top==19)
+ printf("Full Stack");
+ else
+ stk[top]=s;
+}
+void pop ()
+{
+ if (top==0)
+ printf("Empty");
+ else
+ {
+  printf("%c",stk[top]);
+  top--;
+ }
+}
+int prec (char c)
+{
+ int pre,pre1;
+ pre1=toascii(c);
+ if (pre1==36)
+ pre=0;
+ else if (pre1==43 && pre1==45)
+ pre=1;
+ else if (pre1==42 && pre1==47)
+ pre=2;
+ else if (pre1==40)
+ pre=0;
+ return pre;
+}
